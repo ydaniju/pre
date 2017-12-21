@@ -2,7 +2,7 @@
 DIRECTORY=UserManager
 
 if [ ! -d "$DIRECTORY" ]; then
-  git clone git@github.com:BolajiOlajide/UserManager.git
+  git clone git@github.com:BolajiOlajide/$DIRECTORY.git
 fi
 
 if type node > /dev/null
