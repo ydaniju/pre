@@ -13,6 +13,7 @@ if type node > /dev/null
     brew install node
     # sudo apt-get update
     # sudo apt-get install nodejs
+    # sudo apt-get install npm
   fi
 
 cd $DIRECTORY
