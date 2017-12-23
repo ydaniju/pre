@@ -50,7 +50,7 @@ services:
 touch .env
 
 echo 'PORT=3000
-DB_URL=mongodb://localhost:27017/db
+DB_URL=mongodb://0.0.0.0:27017
 ' >> .env
 
 docker-compose up
