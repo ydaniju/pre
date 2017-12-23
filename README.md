@@ -8,15 +8,14 @@ This script is written with bash.
 
 ### Installation
 
-* Start up your terminal (or Command Prompt on Windows OS).
+* Install [PowerShell](https://github.com/PowerShell/PowerShell/releases) if you use Windows.
 
-* Make sure you have docker installed and docker-compose working.
+* Start up your terminal (or PowerShell on Windows OS).
+
+* If you use Windows, install [docker](https://docs.docker.com/docker-for-windows/install/#download-docker-for-windows).
 
 * Run `chmod u+x setup.sh`.
 
 * Run `./setup.sh`
 
 This should get ehe environment up
-
-
-
