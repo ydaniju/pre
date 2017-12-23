@@ -1,13 +1,33 @@
 #!/usr/bin/env bash
 DIRECTORY=UserManager
 
+case "$OSTYPE" in
+  darwin*)
+    echo "OSX detected"
+    command -v brew >/dev/null 2>&1 || { echo >&2 "Installing Homebrew Now"; \
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; }
+    brew install docker docker-compose
+  ;;
+  linux*)
+    echo "Linux detected"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+    test -d ~/.linuxbrew && PATH="$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin:$PATH"
+    test -d /home/linuxbrew/.linuxbrew && PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
+    test -r ~/.bash_profile && echo "export PATH='$(brew --prefix)/bin:$(brew --prefix)/sbin'":'"$PATH"' >>~/.bash_profile
+    echo "export PATH='$(brew --prefix)/bin:$(brew --prefix)/sbin'":'"$PATH"' >>~/.profile
+    brew install docker docker-compose
+  ;;
+  msys*)    echo "WINDOWS" ;;
+  *)        echo "unknown: $OSTYPE" ;;
+esac
+
 if [ ! -d "$DIRECTORY" ]; then
   git clone git@github.com:BolajiOlajide/$DIRECTORY.git
 fi
 
 cd $DIRECTORY
 
-rm Dockerfile
+[ -e Dockerfile ] && rm Dockerfile
 
 touch Dockerfile
 
@@ -21,7 +41,7 @@ EXPOSE 3000
 CMD [ "npm", "start" ]
 ' >> Dockerfile
 
-rm docker-compose.yml
+[ -e docker-compose.yml ] && rm docker-compose.yml
 
 touch docker-compose.yml
 
